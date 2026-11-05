@@ -1,0 +1,57 @@
+:root {
+  --chalk: #22302c; --chalk-2: #2d3d38; --yellow: #e8c547;
+  --bg: #f6f7f5; --text: #1d2321; --muted: #6b7672; --line: #dde1de;
+  --sans: "DM Sans", system-ui, sans-serif; --serif: "Source Serif 4", Georgia, serif;
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body { display: grid; grid-template-columns: 280px 1fr; font-family: var(--sans); background: var(--bg); color: var(--text); }
+button { font: inherit; cursor: pointer; }
+:focus-visible { outline: 2px solid var(--yellow); outline-offset: 2px; }
+
+#sidebar { background: var(--chalk); color: #e7ece9; display: flex; flex-direction: column; padding: 14px; gap: 12px; min-height: 0; }
+.new-chat { background: var(--yellow); color: var(--chalk); border: 0; border-radius: 8px; padding: 10px; font-weight: 700; }
+#history { overflow-y: auto; display: flex; flex-direction: column; gap: 2px; }
+.item { display: flex; align-items: center; border-radius: 8px; }
+.item:hover, .item.active { background: var(--chalk-2); }
+.item .open { flex: 1; min-width: 0; text-align: left; background: none; border: 0; color: inherit; padding: 9px 10px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.item .del { background: none; border: 0; color: #9fb0a9; padding: 6px 10px; visibility: hidden; }
+.item:hover .del, .item .del:focus-visible { visibility: visible; }
+.item .del:hover { color: #ff9b8f; }
+
+main { display: flex; flex-direction: column; min-width: 0; height: 100vh; }
+header { display: flex; align-items: center; gap: 12px; padding: 14px 24px; border-bottom: 1px solid var(--line); }
+header h1 { font-size: 15px; font-weight: 500; margin: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#toggle { display: none; border: 1px solid var(--line); background: #fff; border-radius: 6px; padding: 6px 10px; }
+
+#messages { flex: 1; overflow-y: auto; padding: 24px; }
+.row { max-width: 740px; margin: 0 auto 22px; }
+.row.user { display: flex; justify-content: flex-end; }
+.row.user .bubble { background: var(--chalk); color: #fff; padding: 10px 16px; border-radius: 16px 16px 4px 16px; max-width: 85%; white-space: pre-wrap; }
+.row.assistant .bubble { font-family: var(--serif); font-size: 18px; line-height: 1.65; }
+.bubble p { margin: 0 0 .8em; }
+.bubble pre { background: var(--chalk); color: #e7ece9; padding: 14px; border-radius: 8px; overflow-x: auto; font-size: 14px; line-height: 1.5; }
+.bubble code { font-family: ui-monospace, Menlo, monospace; font-size: .85em; }
+.bubble :not(pre) > code { background: #e9ece9; padding: 2px 5px; border-radius: 4px; }
+.row.error .bubble { color: #a8321f; font-family: var(--sans); font-size: 15px; }
+.typing::after { content: ""; display: inline-block; width: 8px; height: 8px; margin-left: 4px; border-radius: 50%; background: var(--yellow); animation: pulse 1s infinite; }
+@keyframes pulse { 50% { opacity: .2; } }
+
+#empty { max-width: 740px; margin: 12vh auto 0; }
+#empty h2 { font-family: var(--serif); font-weight: 600; font-size: 34px; margin: 0 0 20px; }
+.starters { display: flex; flex-direction: column; gap: 8px; align-items: flex-start; }
+.starters button { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; }
+.starters button:hover { border-color: var(--chalk); }
+
+#composer { display: flex; gap: 10px; align-items: flex-end; max-width: 788px; width: 100%; margin: 0 auto; padding: 12px 24px 22px; }
+#input { flex: 1; resize: none; max-height: 200px; font: inherit; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; background: #fff; }
+#send { background: var(--chalk); color: #fff; border: 0; border-radius: 12px; padding: 12px 18px; font-weight: 500; }
+#send:disabled { opacity: .5; cursor: not-allowed; }
+
+@media (max-width: 760px) {
+  body { grid-template-columns: 1fr; }
+  #sidebar { position: fixed; inset: 0 auto 0 0; width: 280px; z-index: 5; transform: translateX(-100%); transition: transform .2s; }
+  body.open #sidebar { transform: none; }
+  #toggle { display: block; }
+}
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }

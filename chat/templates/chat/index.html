@@ -1,0 +1,46 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Tutor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'chat/app.css' %}">
+</head>
+<body>
+  <aside id="sidebar">
+    <button id="new-chat" class="new-chat">New chat</button>
+    <nav id="history" aria-label="Chat history"></nav>
+  </aside>
+
+  <main>
+    <header>
+      <button id="toggle" aria-label="Toggle history">Menu</button>
+      <h1 id="title">AI Tutor</h1>
+    </header>
+
+    <section id="messages" aria-live="polite">
+      <div id="empty">
+        <h2>What are you studying today?</h2>
+        <div class="starters">
+          <button>Explain recursion with a simple example</button>
+          <button>Help me understand how derivatives work</button>
+          <button>Quiz me on the causes of World War I</button>
+        </div>
+      </div>
+    </section>
+
+    <form id="composer">
+      <textarea id="input" rows="1" placeholder="Ask your tutor anything" maxlength="4000"></textarea>
+      <button id="send" type="submit">Send</button>
+    </form>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.6/purify.min.js"></script>
+  <script src="{% static 'chat/app.js' %}"></script>
+</body>
+</html>
